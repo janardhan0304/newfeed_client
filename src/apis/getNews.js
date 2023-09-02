@@ -1,14 +1,13 @@
 import axios from 'axios';
-
+const api = axios.create({
+    baseURL: 'http://localhost:8000', // Change this to your backend server's URL
+  });
 export const getNews=async()=>{
-    const URL='';
     try {
-        // return axios.get(URL)
-        return {
-            'name':"janardhan",
-            'age':20
-        };
-    } catch (error) {
+        const data= await api.get('/news')
+        return data;
+    }catch (error) {
         console.log("Error from get news : ",error);
     }
 }
+

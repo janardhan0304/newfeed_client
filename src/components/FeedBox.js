@@ -1,20 +1,26 @@
 import {Box} from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 
 import { getNews } from '../apis/getNews';
+import Article from './Article.js';
 function FeedBox() {
-
+  const [data,setData]=useState([])
   useEffect(()=>{
-    dailyNews();
+    dailyNews()
   },[]);
 
   let  dailyNews = async ()=> {
-      return await getNews();
+      let response=await getNews();
+      setData(response.data);
   }
 
   return (
-    <Box bgcolor='red' width='70%' margin=' 3rem auto 0 auto'>
-        Janardhan test
+    <Box width='70%' margin=' 3rem auto 0 auto' >
+        {
+          data.map(d =>
+             <Article data={d}/>
+          )
+        }
     </Box> 
   )
 }
